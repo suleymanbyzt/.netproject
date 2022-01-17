@@ -3,9 +3,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -13,18 +11,26 @@ namespace Business.Concrete
     {
         ICategoryDal _categoryDal;
 
-        public CategoryManager (ICategoryDal categoryDal)
+        public CategoryManager(ICategoryDal categoryDal)
         {
             _categoryDal = categoryDal;
         }
+
         public List<Category> GetAll()
         {
-            return _categoryDal.GetAll();   
+            //İş kodları
+            return _categoryDal.GetAll();
         }
 
-        public List<Category> GetById(int categoryId)
+        //Select * from Categories where CategoryId = 3
+        public Category GetById(int categoryId)
         {
             return _categoryDal.Get(c => c.CatogoryId == categoryId);
+        }
+
+        List<Category> ICategoryService.GetById(int categoryId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
